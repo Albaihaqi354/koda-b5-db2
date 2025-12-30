@@ -1,43 +1,47 @@
+# ERD Mermaid Sistem E-wallet
 ```mermaid
 erDiagram
 User {
-    int id pk
+    int id PK
     string name
     string email
 }
 
 Withdraw {
-    int id pk
+    int id PK
     int total
-    int balance_id
+    int balance_id FK
 }
 
 Balance {
-    int id pk
-    string name
-    string balance
+    int id PK
+    int amount
+    int user_id FK
 }
 
 Transaction {
-    int id pk
-    int total
-    int balance_id
+    int id PK
+    string type
+    int amount
+    int balance_id FK
 }
 
 Deposit {
-    int id pk
-    int balance_id
+    int id PK
+    string payment_method
+    int balance_id FK
 }
 
 Wallet {
-    int id pk
-    int balance_id
+    int id PK
     string name
+    int balance
+    int user_id FK
 }
 
-User ||--O{ Balance : has 
-User ||--O{ Wallet : has 
-Balance ||--o{ Withdraw : has
+User ||--o{ Wallet : has
+User ||--o{ Balance : has
+Balance ||--o{ Transaction : records
 Balance ||--o{ Deposit : has
-Balance ||--o{ Transaction : has
+Balance ||--o{ Withdraw : has
 ```
